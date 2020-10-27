@@ -8,8 +8,14 @@
     "test:teamsList": "mocha tests/ringover.teamsList.test",
     "test:groupsList": "mocha tests/ringover.groupsList.test",
     "test:groupByID": "mocha tests/ringover.groupByID.test",
+    "test:usersList": "mocha tests/ringover.usersList.test",
+    "test:userByID": "mocha tests/ringover.userByID.test",
+    "test:userPlanningsListByID": "mocha tests/ringover.userPlanningsListByID.test",
+    "test:userPresencesListByUserID": "mocha tests/ringover.userPresencesListByUserID.test",
+    "test:numbersList": "mocha tests/ringover.numbersList.test",
     "coverage": "nyc mocha tests",
-    "coverage:html": "nyc --reporter=html mocha tests"
+    "coverage:html": "nyc --reporter=html mocha tests",
+    "jsdoc": "rm -rf ./docs && jsdoc index.js --destination ./docs"
   },
   "repository": {
     "type": "git",
@@ -33,6 +39,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "dotenv": "^8.2.0",
+    "jsdoc": "^3.6.6",
     "mocha": "^8.1.3",
     "nyc": "^15.1.0"
   }

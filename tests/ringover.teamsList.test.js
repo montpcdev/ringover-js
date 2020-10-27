@@ -5,7 +5,7 @@ const Ringover = require('../index')
 describe('teamsList', function() {
   this.timeout(0)
   const { TEST_TOKEN } = process.env
-  const clientInvalid = new Ringover('123')
+  const clientInvalid = new Ringover('invalidtoken')
   const client = new Ringover(TEST_TOKEN)
 
   context('invalid token', () => {

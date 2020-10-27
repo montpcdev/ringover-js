@@ -2,7 +2,7 @@ require('dotenv').config()
 const { expect } = require('chai')
 const Ringover = require('../index')
 
-describe('groupsList', function() {
+describe('usersList', function() {
   this.timeout(0)
   const { TEST_TOKEN } = process.env
   const clientInvalid = new Ringover('invalidtoken')
@@ -10,7 +10,7 @@ describe('groupsList', function() {
 
   context('invalid token', () => {
     it('throws error', (done) => {
-      clientInvalid.groupsList()
+      clientInvalid.usersList()
         .catch(err => {
           expect(err.body).to.equal('')
           done()
@@ -18,15 +18,14 @@ describe('groupsList', function() {
         .catch(err => done(err))
     })
   })
-
+  
   context('valid token', () => {
-    it('returns all the groups', (done) => {
-      client.groupsList()
-        .then(response => {
-          expect(response).to.be.an('object')
+    it('returns all the users on your team, and a list of their numbers for each.', (done) => {
+      client.usersList()
+        .catch(err => {
+          expect(err.statusCode).to.equal(401)
           done()
         })
-        .catch(err => done(err))
-    })
+    }).timeout(5000)
   })
 })

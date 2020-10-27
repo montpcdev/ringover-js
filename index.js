@@ -228,7 +228,7 @@ class Ringover {
   *  }
   * @returns {Object}
   */
-  userPlaningsListByID (userId) {
+  userPlanningsListByID (userId) {
     const options = { headers: { 'Authorization': this.token } }
     return requestPromise.get(`${baseUrl}/users/${userId}/plannings`, options)
       .then(res => JSON.parse(res.body))

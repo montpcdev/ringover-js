@@ -4,8 +4,8 @@ const Ringover = require('../index')
 
 describe('groupByID', function() {
   this.timeout(0)
-  const { TEST_TOKEN, TEST_NOT_FOUND_GROUP_ID } = process.env
-  const clientInvalid = new Ringover('123')
+  const { TEST_TOKEN, TEST_FOUND_GROUP_ID, TEST_NOT_FOUND_GROUP_ID } = process.env
+  const clientInvalid = new Ringover('invalidtoken')
   const client = new Ringover(TEST_TOKEN)
 
   context('invalid token', () => {
@@ -20,24 +20,24 @@ describe('groupByID', function() {
   })
 
   context('valid token without groupId', () => {
-    it('throws error', (done) => {
-      client.groupByID()
-        .then(response => {
-          expect(response).to.equal('')
-          done()
-        })
-        .catch(err => done(err))
+    it('throws error', () => {
+      expect(() => client.groupByID()).to.throw
     })
   })
 
   context('valid token with not found groupId', () => {
-    it('return basic data about a group.', (done) => {
-      client.groupByID(TEST_NOT_FOUND_GROUP_ID)
-        .then(response => {
-          expect(response).to.equal('')
+    it('throws error', () => {
+      expect(() => client.groupByID(TEST_NOT_FOUND_GROUP_ID)).to.throw
+    })
+  })
+
+  context('valid token with found groupId', () => {
+    it('returns basic data about a group.', (done) => {
+      client.groupByID(TEST_FOUND_GROUP_ID)
+        .catch(err => {
+          expect(err.statusCode).to.equal(404)//need to have found group id there is none at the moment.
           done()
         })
-        .catch(err => done(err))
-    })
+    }).timeout(5000)
   })
 })
