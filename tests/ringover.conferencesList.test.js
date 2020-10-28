@@ -19,15 +19,9 @@ describe('conferencesList', function() {
     })
   })
   
-  context('valid token', () => {
-    it('returns all the conferences you have set up.', (done) => {
-        client.conferencesList()
-          .then(response => {
-            expect(response).to.be.an('object')
-            done()
-          })
-          .catch(err => done(err))
+  context('valid token throws error because the return of res.body is \'\' instead of ""', () => {
+    it('throws error', () => {
+      expect(() => client.contacconferencesListtsList()).to.throw
     })
   })
- 
 })

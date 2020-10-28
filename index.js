@@ -119,6 +119,7 @@ class Ringover {
   *    }
   *    ]
   * }
+  * @param {*} groupId
   * @returns {Object}
   */
   groupByID (groupId) {
@@ -234,6 +235,7 @@ class Ringover {
 
   /**
   * Delete permanently an user from their unique identifier.
+  * @param {*} userId
   */
   deleteUserByID (userId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -242,11 +244,13 @@ class Ringover {
   }
 
   /**
-  * Delete permanently an user from their unique identifier.
+  * Update the user's profile by replacing it with the one corresponding to the id set in parameter.
+  * @param {*} userId
+  * @param {*} profileId
   */
   updateUserProfiledByID (userId, profileId) {
     const options = { headers: { 'Authorization': this.token } }
-    return requestPromise.delete(`${baseUrl}/users/${userId}/profile/${profileId}`, options)
+    return requestPromise.post(`${baseUrl}/users/${userId}/profile/${profileId}`, options)
       .then(res => JSON.parse(res.body))
   }
 
@@ -269,6 +273,7 @@ class Ringover {
   *      }
   *    ]
   *  }
+  * @param {*} userId
   * @returns {Object}
   */
   userPlanningsListByID (userId) {
@@ -291,6 +296,7 @@ class Ringover {
   *    "is_snooze": true,
   *    "snooze_type": "meeting"
   *  }
+  * @param {*} userId
   * @returns {Object}
   */
   userPresencesListByUserID (userId) {
@@ -355,6 +361,7 @@ class Ringover {
   *      "is_wrong_format": null
   *    }
   *  }
+  * @param {*} number
   * @returns {Object}
   */
   numberByNumber (number) {
@@ -424,6 +431,8 @@ class Ringover {
   *    "scenario_type": "menu",
   *    "is_default": true
   *  }
+  * @param {*} ivrId
+  * @param {*} scenarioId
   * @returns {Object}
   */
   ivrScenarioByIDAndScenarioID (ivrId, scenarioId) {
@@ -449,6 +458,7 @@ class Ringover {
   *      }
   *    ]
   *  }
+  * @param {*} ivrId
   * @returns {Object}
   */
   ivrScenariosListByIvrID (ivrId) {
@@ -494,6 +504,7 @@ class Ringover {
   *      }
   *    ]
   *  }
+  * @param {*} ivrId
   * @returns {Object}
   */
   ivrByID (ivrId) {
@@ -536,6 +547,7 @@ class Ringover {
   *    "description": "my tag description",
   *    "creation_date": "2018-08-12T12:12:40.53Z"
   *  }
+  * @param {*} tagId
   * @returns {Object}
   */
   tagByID (tagId) {
@@ -610,6 +622,7 @@ class Ringover {
   *      }
   *    ]
   *  }
+  * @param {*} conferenceId
   * @returns {Object}
   */
   conferenceByID (conferenceId) {
@@ -621,6 +634,8 @@ class Ringover {
   /**
   * Update the pincode of the conference indicated in the parameter.
   * You have to set parameters directly in the URL.
+  * @param {*} conferenceId
+  * @param {*} pincodeId
   */
  updatePincodeConferenceById (conferenceId, pincodeId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -656,6 +671,7 @@ class Ringover {
   *    "limit_count": 1,
   *    "limit_offset": 0
   *  }
+  * @param {*} body
   * @returns {Object}
   */
  currentCallsList (body) {
@@ -802,6 +818,7 @@ class Ringover {
   *      ],
   *      "total_call_count": 1337
   *    }
+  * @param {*} params
   * @returns {Object}
   */
   callsList (params) {
@@ -942,6 +959,7 @@ class Ringover {
   *    ],
   *    "total_call_count": 1337
   *  }
+  * @param {*} callId
   * @returns {Object}
   */
   callByID (callId) {
@@ -952,6 +970,7 @@ class Ringover {
 
   /**
   * Event to enable/disable mute for specific channel
+  * @param {*} channelId
   */
   disableEnableMuteChannel(channelId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -961,6 +980,7 @@ class Ringover {
 
   /**
   * Event to enable/disable hold for specific channel
+  * @param {*} channelId
   */
   disableEnableHoldChannel(channelId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -970,6 +990,7 @@ class Ringover {
 
   /**
   * Event to enable/disable record for specific channel
+  * @param {*} channelId
   */
    disableEnableRecordChannel(channelId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -979,6 +1000,8 @@ class Ringover {
 
   /**
   * Event to transfer a specific channel
+  * @param {*} channelId
+  * @param {*} body
   */
   transferChannel(channelId, body) {
     const options = { headers: { 'Authorization': this.token } }
@@ -993,6 +1016,8 @@ class Ringover {
 
   /**
   * Event to transfer a specific channel
+  * @param {*} channelId
+  * @param {*} body
   */
   sendDtmfToChannel(channelId, body) {
   const options = { headers: { 'Authorization': this.token } }
@@ -1051,7 +1076,8 @@ class Ringover {
   *            ]
   *          }
   *        ]
-  *     }  
+  *     }
+  * @param {*} params
   * @returns {Object}
   */
   contactsList (params) {
@@ -1095,6 +1121,8 @@ class Ringover {
   *      }
   *    ]
   *  }
+  * @param {*} contactId
+  * @param {*} params
   * @returns {Object}
   */
   contactByID (contactId, params) {
@@ -1116,6 +1144,7 @@ class Ringover {
   *    "limit_count": 10,
   *    "limit_offset": 10
   *  }
+  * @param {*} body
   * @returns {Object}
   */
   getOrCreateContacts (body) {
@@ -1146,6 +1175,8 @@ class Ringover {
   *      }
   *    ]
   *  }
+  * @param {*} contactId
+  * @param {*} body
   * @returns {Object}
   */
   updateContact (contactId, body) {
@@ -1160,6 +1191,7 @@ class Ringover {
 
   /**
   * Delete the contact by his id
+  * @param {*} contactId
   */
   deleteContact (contactId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1169,6 +1201,7 @@ class Ringover {
 
   /**
   * Toggle the attribute is_shared of the contact indicated in the parameter.
+  * @param {*} contactId
   */
   updateIsSharedStatusContactByID (contactId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1179,6 +1212,8 @@ class Ringover {
   /**
   * Update the attributed firstname of the contact indicated in the parameter.
   * You have to set the parameter directly in the URL.
+  * @param {*} contactId
+  * @param {*} firstName
   */
   updateFirstnameContactByID (contactId, firstName) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1189,6 +1224,8 @@ class Ringover {
   /**
   * Update the attributed lastname of the contact indicated in the parameter.
   * You have to set the parameter directly in the URL.
+  * @param {*} contactId
+  * @param {*} lastName
   */
   updateLastnameContactByID (contactId, lastName) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1200,6 +1237,8 @@ class Ringover {
   /**
   * Update the attributed company of the contact indicated in the parameter.
   * You have to set the parameter directly in the URL.
+  * @param {*} contactId
+  * @param {*} company
   */
   updateCompanyContactByID (contactId, company) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1210,6 +1249,8 @@ class Ringover {
   /**
   * Allow to add one or more numbers to the contact set in parameter.
   * Phone numbers must be in international format.
+  * @param {*} contactId
+  * @param {*} body
   */
   addNumberContactByID (contactId, body) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1225,6 +1266,7 @@ class Ringover {
   /**
   * Update the attributed company of the contact indicated in the parameter.
   * You have to set the parameter directly in the URL.
+  * @param {*} contactId
   */
   deleteNumbersContactByID (contactId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1236,6 +1278,9 @@ class Ringover {
   * Update a phone number from the id and the phone number of the contact.
   * The number in the API route is the old number, while the new number is in the json parameter.
   * Phone numbers must be in E.164 format.
+  * @param {*} contactId
+  * @param {*} number
+  * @param {*} body
   */
   updateNumberContactByID (contactId, number, body) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1249,6 +1294,8 @@ class Ringover {
 
   /**
   * Delete the phone number of the contact set in parameter.
+  * @param {*} contactId
+  * @param {*} number
   */
   deleteNumberContactByID (contactId, number) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1533,6 +1580,7 @@ class Ringover {
   *      ],
   *      "conversation_list_count": 1
   *    }
+  * @param {*} params
   * @returns {Object}
   */
   conversationsList (params) {
@@ -1809,6 +1857,7 @@ class Ringover {
   *      "creation_date": "2018-06-12T23:23:40.99Z",
   *      "update_date": "2019-02-12T12:20:50.52Z"
   *    }
+  * @param {*} conversationId
   * @returns {Object}
   */
   conversationByID (conversationId) {
@@ -1819,6 +1868,7 @@ class Ringover {
 
   /**
   * This will archive a specific conversation in which you have the right to write.
+  * @param {*} conversationId
   */
   archiveConversationByID (conversationId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1828,6 +1878,7 @@ class Ringover {
   
   /**
   * This will archive a specific conversation in which you have the right to write.
+  * @param {*} conversationId
   */
   unArchiveConversationByID (conversationId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1837,6 +1888,8 @@ class Ringover {
   
   /**
   * This will update the name of a specific conversation on which you have the right to read.
+  * @param {*} conversationId
+  * @param {*} name
   */
   renameConversationByID (conversationId, name) {
     const options = { headers: { 'Authorization': this.token } }
@@ -1847,6 +1900,8 @@ class Ringover {
   
   /**
   * This will update the name of a specific conversation on which you have the right to read.
+  * @param {*} conversationId
+  * @param {*} purpose
   */
   updatePurposeConversationByID (conversationId, purpose) {
     const options = { headers: { 'Authorization': this.token } }
@@ -2017,6 +2072,7 @@ class Ringover {
   *    "list_external_member_count": 0,
   *    "is_empty": false
   *  }
+  * @param {*} conversationId
   * @returns {Object}
   */
   conversationMembersListByID (conversationId) {
@@ -2092,6 +2148,7 @@ class Ringover {
   *    "creation_date": "2018-06-12T23:23:40.99Z",
   *    "update_date": "2019-02-12T12:20:50.52Z"
   *  }
+  * @param {*} conversationId
   * @returns {Object}
   */
   conversationMessagesListByID (conversationId) {
@@ -2102,6 +2159,8 @@ class Ringover {
 
   /**
   * This will archive a message in a specific conversation in which you have the right to write.
+  * @param {*} conversationId
+  * @param {*} messageId
   */
   archiveMessageConversationByID (conversationId, messageId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -2111,6 +2170,8 @@ class Ringover {
 
   /**
   * This will unarchive a message in specific conversation in which you have the right to write.
+  * @param {*} conversationId
+  * @param {*} messageId
   */
   unArchiveMessageConversationByID (conversationId, messageId) {
     const options = { headers: { 'Authorization': this.token } }
@@ -2129,6 +2190,7 @@ class Ringover {
   *    "to_number": "+33611223344",
   *    "content": "Hello World!"
   *  }
+  * @param {*} body
   * @returns {Object}
   */
   pushSms (body) {
@@ -2170,6 +2232,7 @@ class Ringover {
   *    "id": 12,
   *    "name": "MyProfile"
   *  }
+  * @param {*} profileId
   * @returns {Object}
   */
   profileByID (profileId) {
@@ -2218,6 +2281,7 @@ class Ringover {
   *      }
   *    ]
   *  }
+  * @param {*} params
   * @returns {Object}
   */
   blacklistNumbersList (params) {
@@ -2237,6 +2301,7 @@ class Ringover {
   *    "to_number": "+33611223344",
   *    "content": "Hello World!"
   *  }
+  * @param {*} body
   * @returns {Object}
   */
   addNumberToBlackList (body) {
@@ -2258,6 +2323,7 @@ class Ringover {
   *    "number": 33184800000,
   *    "comment": "Unfriendly"
   *  }
+  * @param {*} number
   * @returns {Object}
   */
   checkIfNumberIsBlackListed (number) {
@@ -2268,6 +2334,7 @@ class Ringover {
 
   /**
   * Remove a number from your team's blacklist.
+  * @param {*} number
   */
  removeNumberFromBlackListed (number) {
   const options = { headers: { 'Authorization': this.token } }
@@ -2277,6 +2344,8 @@ class Ringover {
 
   /**
   * Update the comment of a team's blacklisted number
+  * @param {*} number
+  * @param {*} comment
   */
   updateCommentBlackListed (number, comment) {
     const options = { headers: { 'Authorization': this.token } }
@@ -2302,6 +2371,8 @@ class Ringover {
   *      }
   *    ]
   *  }
+  * @param {*} userId
+  * @param {*} params
   * @returns {Object}
   */
   userBlacklistNumbersListByUserID (userId, params) {
@@ -2317,6 +2388,8 @@ class Ringover {
   *    "number": 33184800000,
   *    "comment": null
   *  }
+  * @param {*} userId
+  * @param {*} body
   * @returns {Object}
   */
   addNumberToUserBlackList (userId, body) {
@@ -2338,6 +2411,8 @@ class Ringover {
   *    "number": 33184800000,
   *    "comment": "Unfriendly"
   *  }
+  * @param {*} userId
+  * @param {*} number
   * @returns {Object}
   */
   checkIfNumberIsBlackListedInUserById (userId, number) {
@@ -2348,6 +2423,8 @@ class Ringover {
 
   /**
   * Remove a number from your user's blacklist.
+  * @param {*} userId
+  * @param {*} number
   */
   removeNumberFromUserBlackListedByID (userId, number) {
     const options = { headers: { 'Authorization': this.token } }
@@ -2357,6 +2434,9 @@ class Ringover {
 
   /**
   * Update the comment of a user's blacklisted number
+  * @param {*} userId
+  * @param {*} number
+  * @param {*} comment
   */
   updateCommentFromUserBlackListed (userId, number, comment) {
     const options = { headers: { 'Authorization': this.token } }
@@ -2369,6 +2449,7 @@ class Ringover {
   * The from_number attributed is the phone number of your user while to_number is the number called by the user.
   * Here is the call workflow:
   * Your user (from_number) will see the recipient's number (to_number) displayed for an incoming call; once your user picks up the phone then a call will be made to the recipient (to_number).
+  * @param {*} body
   */
   telecomsCallback (body) {
     const options = { headers: { 'Authorization': this.token } }
