@@ -69,7 +69,7 @@ class Ringover {
     return requestPromise.get(`${baseUrl}/teams`, options)
       .then(res => JSON.parse(res.body))
   }
-  
+
   /**
   * Retrieve all the groups from your team.
   * @example 
@@ -128,6 +128,15 @@ class Ringover {
   }
 
   /**
+  * Toggle the is_jumper parameter of a specific group. It allows users to leave and join the group freely. It corresponds to the Free access switch of the group in the dashboard.
+  */
+  toggleIsJumperGroupById (groupId) {
+    const options = { headers: { 'Authorization': this.token } }
+    return requestPromise.put(`${baseUrl}/groups/${groupId}/isjumper/toggle`, options)//need to update to patch, maybe using axios
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
   * Retrieve all the users on your team, and a list of their numbers for each.
   * The size of the list is set on the attribute list_count.
   * @example 
@@ -171,6 +180,22 @@ class Ringover {
   }
 
   /**
+  * Create a new user with or without commitment from their email address and phone number (E.164 format)
+  * @example 
+  *  {
+  *    "email": "myemail@domain.com",
+  *    "number": 33179750000,
+  *    "commitement": false
+  *  }
+  * @returns {Object}
+  */
+  createUser () {
+    const options = { headers: { 'Authorization': this.token } }
+    return requestPromise.post(`${baseUrl}/users`, options)
+      .then(res => JSON.parse(res.body))
+  }
+  
+  /**
   * Retrieve basic data about an user and all phones numbers assigned to them.
   * @example 
   *  {
@@ -204,6 +229,24 @@ class Ringover {
   userByID (userId) {
     const options = { headers: { 'Authorization': this.token } }
     return requestPromise.get(`${baseUrl}/users/${userId}`, options)
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+  * Delete permanently an user from their unique identifier.
+  */
+  deleteUserByID (userId) {
+    const options = { headers: { 'Authorization': this.token } }
+    return requestPromise.delete(`${baseUrl}/users/${userId}`, options)
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+  * Delete permanently an user from their unique identifier.
+  */
+  updateUserProfiledByID (userId, profileId) {
+    const options = { headers: { 'Authorization': this.token } }
+    return requestPromise.delete(`${baseUrl}/users/${userId}/profile/${profileId}`, options)
       .then(res => JSON.parse(res.body))
   }
 
@@ -535,7 +578,7 @@ class Ringover {
   *  }
   * @returns {Object}
   */
-  conferencesList () {
+  conferencesList () {//getting undefined body
     const options = { headers: { 'Authorization': this.token } }
     return requestPromise.get(`${baseUrl}/conferences`, options)
       .then(res => JSON.parse(res.body))
@@ -572,6 +615,40 @@ class Ringover {
   conferenceByID (conferenceId) {
     const options = { headers: { 'Authorization': this.token } }
     return requestPromise.get(`${baseUrl}/conferences/${conferenceId}`, options)
+      .then(res => JSON.parse(res.body))
+  }
+
+  /**
+  * Retrieve the conference corresponding to the ID indicated in the route.
+  * @example 
+  *  {
+  *    "id": 123456,
+  *    "name": "SoConference",
+  *    "numbers": [
+  *      {
+  *        "number": 33184800000,
+  *        "label": "myfavoritenumber",
+  *        "type": "PHONE",
+  *        "format": {
+  *          "raw": 184800000,
+  *          "e164": "+33184800000",
+  *          "international_prefix": "33",
+  *          "international": "+33 1 84 80 00 00",
+  *          "international_alt": "33184800000",
+  *          "national": "01 84 80 00 00",
+  *          "national_alt": "0184800000",
+  *          "rfc3966": "tel:+33-1-84-80-00-00",
+  *          "country_code": "FR",
+  *          "is_wrong_format": null
+  *        }
+  *      }
+  *    ]
+  *  }
+  * @returns {Object}
+  */
+ updatePincodeConferenceById (conferenceId, pincodeId) {
+    const options = { headers: { 'Authorization': this.token } }
+    return requestPromise.put(`${baseUrl}/conferences/${conferenceId}/pincode/${pincodeId}`, options)//need to update to patch, maybe using axios
       .then(res => JSON.parse(res.body))
   }
 
